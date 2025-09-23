@@ -1,0 +1,23 @@
+{
+  "schema": {
+    "$id": "systems.schema.json",
+    "type": "object",
+    "properties": {
+      "id": { "type": "string" },
+      "name": { "type": "string" },
+      "code": { "type": "string" }
+    },
+    "required": ["id", "name", "code"]
+  },
+  "samples": [
+    { "id": "sys-inlet", "name": "Inlet", "code": "INL" },
+    { "id": "sys-compressor", "name": "Compressor", "code": "CMP" },
+    { "id": "sys-combustor", "name": "Combustor", "code": "CMB" },
+    { "id": "sys-turbine", "name": "Turbine", "code": "TRB" },
+    { "id": "sys-exhaust", "name": "Exhaust", "code": "EXH" },
+    { "id": "sys-generator", "name": "Generator/Power Section", "code": "GEN" },
+    { "id": "sys-fuel", "name": "Fuel System", "code": "FUL" },
+    { "id": "sys-lube", "name": "Lube & Cooling", "code": "LUB" }
+  ],
+  "commentary": "Systems represent the primary turbine sections used as anchors in the network map."
+}

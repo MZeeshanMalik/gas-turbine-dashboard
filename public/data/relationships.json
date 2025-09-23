@@ -1,0 +1,32 @@
+{
+  "schema": {
+    "$id": "relationships.schema.json",
+    "type": "object",
+    "properties": {
+      "fromType": { "type": "string", "enum": ["system","subsystem","component"] },
+      "fromId": { "type": "string" },
+      "toType": { "type": "string", "enum": ["subsystem","component","vendor"] },
+      "toId": { "type": "string" },
+      "weight": { "type": "number", "minimum": 0, "maximum": 1 },
+      "exclusivity": { "type": "string", "enum": ["single","dual","balanced"] }
+    },
+    "required": ["fromType","fromId","toType","toId","weight","exclusivity"]
+  },
+  "samples": [
+    { "fromType": "system", "fromId": "sys-compressor", "toType": "subsystem", "toId": "sub-compressor-stg1", "weight": 0.5, "exclusivity": "balanced" },
+    { "fromType": "system", "fromId": "sys-compressor", "toType": "subsystem", "toId": "sub-compressor-stg2", "weight": 0.5, "exclusivity": "balanced" },
+    { "fromType": "subsystem", "fromId": "sub-compressor-stg1", "toType": "component", "toId": "cmp-cs1-blade", "weight": 0.7, "exclusivity": "single" },
+    { "fromType": "subsystem", "fromId": "sub-compressor-stg1", "toType": "component", "toId": "cmp-cs1-shroud", "weight": 0.3, "exclusivity": "dual" },
+    { "fromType": "subsystem", "fromId": "sub-comb-fuelnozzles", "toType": "component", "toId": "cmp-fn-atomizer", "weight": 0.8, "exclusivity": "single" },
+    { "fromType": "subsystem", "fromId": "sub-comb-liner", "toType": "component", "toId": "cmp-cl-liner", "weight": 0.6, "exclusivity": "dual" },
+    { "fromType": "component", "fromId": "cmp-ths-blade", "toType": "vendor", "toId": "ven-aeroalloy", "weight": 0.7, "exclusivity": "single" },
+    { "fromType": "component", "fromId": "cmp-ths-blade", "toType": "vendor", "toId": "ven-shenzhen", "weight": 0.3, "exclusivity": "dual" },
+    { "fromType": "component", "fromId": "cmp-cs1-blade", "toType": "vendor", "toId": "ven-omnius", "weight": 1.0, "exclusivity": "single" },
+    { "fromType": "component", "fromId": "cmp-fn-atomizer", "toType": "vendor", "toId": "ven-nippon", "weight": 1.0, "exclusivity": "single" },
+    { "fromType": "component", "fromId": "cmp-cl-liner", "toType": "vendor", "toId": "ven-eurocast", "weight": 0.7, "exclusivity": "dual" },
+    { "fromType": "component", "fromId": "cmp-cl-liner", "toType": "vendor", "toId": "ven-thermotech", "weight": 0.3, "exclusivity": "dual" },
+    { "fromType": "component", "fromId": "cmp-lube-pump", "toType": "vendor", "toId": "ven-lubepro", "weight": 1.0, "exclusivity": "single" },
+    { "fromType": "component", "fromId": "cmp-gc-coupling", "toType": "vendor", "toId": "ven-voltgrid", "weight": 1.0, "exclusivity": "single" }
+  ],
+  "commentary": "Edges with weights (dependency strength) and exclusivity encoding for color rules."
+}

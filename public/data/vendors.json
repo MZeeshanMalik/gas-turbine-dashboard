@@ -1,0 +1,26 @@
+{
+  "schema": {
+    "$id": "vendors.schema.json",
+    "type": "object",
+    "properties": {
+      "id": { "type": "string" },
+      "name": { "type": "string" },
+      "tier": { "type": "integer", "enum": [0,1,2] },
+      "regionCode": { "type": "string" }
+    },
+    "required": ["id", "name", "tier", "regionCode"]
+  },
+  "samples": [
+    { "id": "ven-aeroalloy", "name": "AeroAlloy GmbH", "tier": 1, "regionCode": "DE" },
+    { "id": "ven-shenzhen", "name": "Shenzhen Precision", "tier": 2, "regionCode": "CN" },
+    { "id": "ven-omnius", "name": "Omnius Forge", "tier": 2, "regionCode": "US" },
+    { "id": "ven-nippon", "name": "Nippon Ceramics", "tier": 1, "regionCode": "JP" },
+    { "id": "ven-meximet", "name": "MexiMetals", "tier": 2, "regionCode": "MX" },
+    { "id": "ven-indfab", "name": "IndFab Co.", "tier": 2, "regionCode": "IN" },
+    { "id": "ven-thermotech", "name": "ThermoTech", "tier": 1, "regionCode": "US" },
+    { "id": "ven-lubepro", "name": "LubePro", "tier": 1, "regionCode": "US" },
+    { "id": "ven-voltgrid", "name": "VoltGrid", "tier": 0, "regionCode": "US" },
+    { "id": "ven-eurocast", "name": "EuroCast", "tier": 1, "regionCode": "DE" }
+  ],
+  "commentary": "Vendors across tiers with regional codes for choropleth and clustering."
+}

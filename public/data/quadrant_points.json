@@ -1,0 +1,23 @@
+{
+  "schema": {
+    "$id": "quadrant_points.schema.json",
+    "type": "object",
+    "properties": {
+      "id": { "type": "string" },
+      "name": { "type": "string" },
+      "type": { "type": "string", "enum": ["component","vendor"] },
+      "complexity": { "type": "integer", "minimum": 0, "maximum": 100 },
+      "robustness": { "type": "integer", "minimum": 0, "maximum": 100 },
+      "impact": { "type": "integer", "minimum": 0, "maximum": 100 },
+      "riskScore": { "type": "integer", "minimum": 0, "maximum": 100 }
+    },
+    "required": ["id","name","type","complexity","robustness","impact","riskScore"]
+  },
+  "samples": [
+    { "id": "cmp-cs1-blade", "name": "Stage 1 Blades", "type": "component", "complexity": 76, "robustness": 28, "impact": 90, "riskScore": 84 },
+    { "id": "cmp-ths-blade", "name": "Turbine Blades", "type": "component", "complexity": 88, "robustness": 32, "impact": 95, "riskScore": 79 },
+    { "id": "ven-omnius", "name": "Omnius Forge", "type": "vendor", "complexity": 48, "robustness": 45, "impact": 60, "riskScore": 57 },
+    { "id": "ven-shenzhen", "name": "Shenzhen Precision", "type": "vendor", "complexity": 40, "robustness": 30, "impact": 55, "riskScore": 69 }
+  ],
+  "commentary": "Derived points for quadrant plotting; typically computed from metrics.json."
+}

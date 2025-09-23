@@ -1,0 +1,24 @@
+{
+  "schema": {
+    "$id": "subsystems.schema.json",
+    "type": "object",
+    "properties": {
+      "id": { "type": "string" },
+      "systemId": { "type": "string" },
+      "name": { "type": "string" },
+      "code": { "type": "string" }
+    },
+    "required": ["id", "systemId", "name", "code"]
+  },
+  "samples": [
+    { "id": "sub-inlet-filter", "systemId": "sys-inlet", "name": "Air Filtration", "code": "AF" },
+    { "id": "sub-compressor-stg1", "systemId": "sys-compressor", "name": "Compressor Stage 1", "code": "CS1" },
+    { "id": "sub-compressor-stg2", "systemId": "sys-compressor", "name": "Compressor Stage 2", "code": "CS2" },
+    { "id": "sub-comb-fuelnozzles", "systemId": "sys-combustor", "name": "Fuel Nozzles", "code": "FN" },
+    { "id": "sub-comb-liner", "systemId": "sys-combustor", "name": "Combustor Liner", "code": "CL" },
+    { "id": "sub-turbine-stage", "systemId": "sys-turbine", "name": "Turbine Hot Section", "code": "THS" },
+    { "id": "sub-exhaust-duct", "systemId": "sys-exhaust", "name": "Exhaust Duct", "code": "ED" },
+    { "id": "sub-gen-coupling", "systemId": "sys-generator", "name": "Generator Coupling", "code": "GC" }
+  ],
+  "commentary": "Subsystems map into specific domain groupings under a system for drill interactions."
+}

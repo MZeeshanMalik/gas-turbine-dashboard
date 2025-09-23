@@ -1,0 +1,22 @@
+{
+  "schema": {
+    "$id": "regions.schema.json",
+    "type": "object",
+    "properties": {
+      "code": { "type": "string" },
+      "name": { "type": "string" },
+      "riskFlags": { "type": "array", "items": { "type": "string" } },
+      "sanctionFlag": { "type": "boolean" }
+    },
+    "required": ["code","name"]
+  },
+  "samples": [
+    { "code": "US", "name": "United States", "riskFlags": [], "sanctionFlag": false },
+    { "code": "DE", "name": "Germany", "riskFlags": [], "sanctionFlag": false },
+    { "code": "CN", "name": "China", "riskFlags": ["export controls"], "sanctionFlag": true },
+    { "code": "MX", "name": "Mexico", "riskFlags": [], "sanctionFlag": false },
+    { "code": "IN", "name": "India", "riskFlags": [], "sanctionFlag": false },
+    { "code": "JP", "name": "Japan", "riskFlags": [], "sanctionFlag": false }
+  ],
+  "commentary": "Regions for choropleth and policy toggles."
+}

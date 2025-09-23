@@ -1,0 +1,32 @@
+{
+  "schema": {
+    "$id": "components.schema.json",
+    "type": "object",
+    "properties": {
+      "id": { "type": "string" },
+      "subsystemId": { "type": "string" },
+      "name": { "type": "string" },
+      "code": { "type": "string" },
+      "critical": { "type": "boolean" }
+    },
+    "required": ["id", "subsystemId", "name", "code", "critical"]
+  },
+  "samples": [
+    { "id": "cmp-inlet-grid", "subsystemId": "sub-inlet-filter", "name": "Inlet Grid", "code": "IG", "critical": false },
+    { "id": "cmp-cs1-blade", "subsystemId": "sub-compressor-stg1", "name": "Stage 1 Blades", "code": "B1", "critical": true },
+    { "id": "cmp-cs1-shroud", "subsystemId": "sub-compressor-stg1", "name": "Shroud Ring", "code": "SR", "critical": true },
+    { "id": "cmp-cs2-vane", "subsystemId": "sub-compressor-stg2", "name": "Stator Vanes", "code": "SV", "critical": true },
+    { "id": "cmp-fn-atomizer", "subsystemId": "sub-comb-fuelnozzles", "name": "Fuel Atomizer", "code": "FA", "critical": true },
+    { "id": "cmp-cl-liner", "subsystemId": "sub-comb-liner", "name": "Liner Panel", "code": "LP", "critical": true },
+    { "id": "cmp-ths-blade", "subsystemId": "sub-turbine-stage", "name": "Turbine Blades", "code": "TB", "critical": true },
+    { "id": "cmp-ths-disk", "subsystemId": "sub-turbine-stage", "name": "Turbine Disk", "code": "TD", "critical": true },
+    { "id": "cmp-exh-duct", "subsystemId": "sub-exhaust-duct", "name": "Exhaust Duct Panel", "code": "EDP", "critical": false },
+    { "id": "cmp-gc-coupling", "subsystemId": "sub-gen-coupling", "name": "Flexible Coupling", "code": "FC", "critical": true },
+    { "id": "cmp-lube-pump", "subsystemId": "sub-gen-coupling", "name": "Lube Oil Pump", "code": "LOP", "critical": true },
+    { "id": "cmp-fuel-valve", "subsystemId": "sub-comb-fuelnozzles", "name": "Fuel Control Valve", "code": "FCV", "critical": true },
+    { "id": "cmp-cs2-shaft", "subsystemId": "sub-compressor-stg2", "name": "Compressor Shaft", "code": "CSH", "critical": true },
+    { "id": "cmp-inlet-sensor", "subsystemId": "sub-inlet-filter", "name": "Intake Sensor", "code": "IS", "critical": false },
+    { "id": "cmp-exh-thermocouple", "subsystemId": "sub-exhaust-duct", "name": "Thermocouple", "code": "TC", "critical": false }
+  ],
+  "commentary": "Components enumerate BOM items mapped to subsystems for risk and sourcing analysis."
+}

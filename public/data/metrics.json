@@ -1,0 +1,32 @@
+{
+  "schema": {
+    "$id": "metrics.schema.json",
+    "type": "object",
+    "properties": {
+      "id": { "type": "string" },
+      "entityType": { "type": "string", "enum": ["component","vendor"] },
+      "complexity_score": { "type": "integer", "minimum": 0, "maximum": 100 },
+      "robustness_score": { "type": "integer", "minimum": 0, "maximum": 100 },
+      "lead_time_days": { "type": "integer", "minimum": 0 },
+      "single_source_flag": { "type": "boolean" },
+      "alt_vendor_count": { "type": "integer", "minimum": 0 },
+      "geographic_concentration_index": { "type": "number", "minimum": 0, "maximum": 1 },
+      "spend_share": { "type": "number", "minimum": 0, "maximum": 1 },
+      "criticality_score": { "type": "integer", "minimum": 0, "maximum": 100 }
+    },
+    "required": ["id","entityType","complexity_score","robustness_score","lead_time_days","single_source_flag","alt_vendor_count","geographic_concentration_index","spend_share","criticality_score"]
+  },
+  "samples": [
+    { "id": "cmp-ths-blade", "entityType": "component", "complexity_score": 88, "robustness_score": 32, "lead_time_days": 120, "single_source_flag": false, "alt_vendor_count": 1, "geographic_concentration_index": 0.8, "spend_share": 0.25, "criticality_score": 90 },
+    { "id": "cmp-cs1-blade", "entityType": "component", "complexity_score": 76, "robustness_score": 28, "lead_time_days": 95, "single_source_flag": true, "alt_vendor_count": 0, "geographic_concentration_index": 0.6, "spend_share": 0.35, "criticality_score": 85 },
+    { "id": "cmp-fn-atomizer", "entityType": "component", "complexity_score": 64, "robustness_score": 42, "lead_time_days": 60, "single_source_flag": true, "alt_vendor_count": 0, "geographic_concentration_index": 0.5, "spend_share": 0.2, "criticality_score": 72 },
+    { "id": "cmp-cl-liner", "entityType": "component", "complexity_score": 58, "robustness_score": 62, "lead_time_days": 40, "single_source_flag": false, "alt_vendor_count": 2, "geographic_concentration_index": 0.3, "spend_share": 0.1, "criticality_score": 55 },
+    { "id": "ven-aeroalloy", "entityType": "vendor", "complexity_score": 52, "robustness_score": 64, "lead_time_days": 35, "single_source_flag": false, "alt_vendor_count": 3, "geographic_concentration_index": 0.4, "spend_share": 0.22, "criticality_score": 40 },
+    { "id": "ven-shenzhen", "entityType": "vendor", "complexity_score": 40, "robustness_score": 30, "lead_time_days": 80, "single_source_flag": false, "alt_vendor_count": 2, "geographic_concentration_index": 0.85, "spend_share": 0.28, "criticality_score": 60 },
+    { "id": "ven-omnius", "entityType": "vendor", "complexity_score": 48, "robustness_score": 45, "lead_time_days": 50, "single_source_flag": true, "alt_vendor_count": 0, "geographic_concentration_index": 0.5, "spend_share": 0.4, "criticality_score": 65 },
+    { "id": "ven-nippon", "entityType": "vendor", "complexity_score": 62, "robustness_score": 58, "lead_time_days": 45, "single_source_flag": true, "alt_vendor_count": 0, "geographic_concentration_index": 0.2, "spend_share": 0.18, "criticality_score": 55 },
+    { "id": "ven-lubepro", "entityType": "vendor", "complexity_score": 30, "robustness_score": 70, "lead_time_days": 20, "single_source_flag": true, "alt_vendor_count": 0, "geographic_concentration_index": 0.1, "spend_share": 0.12, "criticality_score": 35 },
+    { "id": "ven-voltgrid", "entityType": "vendor", "complexity_score": 44, "robustness_score": 65, "lead_time_days": 25, "single_source_flag": false, "alt_vendor_count": 2, "geographic_concentration_index": 0.3, "spend_share": 0.15, "criticality_score": 45 }
+  ],
+  "commentary": "Metrics per component/vendor enabling risk scoring and quadrant placement."
+}

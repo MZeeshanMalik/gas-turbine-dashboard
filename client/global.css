@@ -1,0 +1,175 @@
+/** @import must precede all other statements */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /**
+   * Tailwind CSS theme
+   * tailwind.config.ts expects the following color variables to be expressed as HSL values.
+   * A different format will require also updating the theme in tailwind.config.ts.
+  */
+  :root {
+    /* Base */
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    /* Primary brand: Indigo #6366F1 */
+    --primary: 239 84% 67%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary accent: Teal #0D9488 */
+    --secondary: 174 85% 31%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 239 84% 96%;
+    --accent-foreground: 239 84% 22%;
+
+    --destructive: 4 86% 59%; /* #F04438 */
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 217 91% 60%;
+
+    --radius: 0.75rem;
+
+    /* Sidebar */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 239 84% 67%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Semantic tokens */
+    --bg-base: 0 0% 100%;
+    --bg-alt: 210 40% 98%;
+    --panel: 0 0% 100%;
+    --panel-alt: 210 40% 97%;
+    --focus-ring: 217 91% 60%;
+
+    /* Risk tiers */
+    --risk-low: 152 82% 39%;        /* #12B76A */
+    --risk-moderate: 36 94% 50%;    /* #F79009 */
+    --risk-high: 4 86% 59%;         /* #F04438 */
+    --risk-critical: 6 73% 39%;     /* #B42318 */
+
+    /* Status */
+    --status-info: 217 91% 60%;     /* #3B82F6 */
+    --status-warning: 36 94% 50%;   /* #F79009 */
+    --status-danger: 4 86% 59%;     /* #F04438 */
+    --status-success: 152 82% 39%;  /* #12B76A */
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 6.5%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 6.5%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 239 84% 67%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 174 85% 31%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 217 91% 60%;
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 239 84% 67%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --bg-base: 222.2 84% 6.5%;
+    --bg-alt: 222.2 84% 8.5%;
+    --panel: 222.2 84% 8%;
+    --panel-alt: 222.2 84% 10%;
+    --focus-ring: 217 91% 60%;
+
+    --risk-low: 152 82% 39%;
+    --risk-moderate: 36 94% 50%;
+    --risk-high: 4 86% 59%;
+    --risk-critical: 6 73% 39%;
+
+    --status-info: 217 91% 60%;
+    --status-warning: 36 94% 50%;
+    --status-danger: 4 86% 59%;
+    --status-success: 152 82% 39%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html, body, #root {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  }
+
+  code, pre, .font-mono {
+    font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  }
+}
+
+@layer utilities {
+  .shadow-panel {
+    box-shadow: 0 1px 2px hsl(0 0% 0% / 0.06), 0 4px 16px hsl(0 0% 0% / 0.06);
+  }
+  .shadow-hovered {
+    box-shadow: 0 2px 6px hsl(0 0% 0% / 0.08), 0 10px 28px hsl(0 0% 0% / 0.08);
+  }
+  .shadow-popover {
+    box-shadow: 0 10px 40px hsl(0 0% 0% / 0.18);
+  }
+  .shadow-tooltip {
+    box-shadow: 0 10px 30px hsl(0 0% 0% / 0.18);
+  }
+  .focus-ring {
+    outline: 2px solid hsl(var(--focus-ring));
+    outline-offset: 2px;
+  }
+  .skeleton {
+    @apply animate-pulse rounded-md bg-muted;
+    background-image: linear-gradient(90deg, rgba(255 255 255 / 0) 0, rgba(255 255 255 / 0.4) 50%, rgba(255 255 255 / 0) 100%);
+    background-size: 200% 100%;
+  }
+}
