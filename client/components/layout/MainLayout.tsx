@@ -20,12 +20,12 @@ export default function MainLayout({
             <Link to="/" className="text-foreground/80 hover:text-foreground">
               Dashboard
             </Link>
-            <Link
+            {/* <Link
               to="/turbine"
               className="text-foreground/80 hover:text-foreground"
             >
               Turbine Visualization
-            </Link>
+            </Link> */}
           </nav>
           <div className="ml-auto flex items-center gap-2">
             <div className="relative">

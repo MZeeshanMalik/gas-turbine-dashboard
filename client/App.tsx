@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import TurbineVisualization from "./pages/TurbineVisualization";
+import SupplyChainDashboard from "./pages/SupplyChainDashboard";
 
 const queryClient = new QueryClient();
 
@@ -19,8 +20,10 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
+          <Route path="/" element={<SupplyChainDashboard />} />
+          <Route path="/index" element={<Index />} />
           <Route path="/turbine" element={<TurbineVisualization />} />
+          <Route path="/supply-chain" element={<SupplyChainDashboard />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

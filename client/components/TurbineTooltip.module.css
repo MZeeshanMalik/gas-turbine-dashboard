@@ -1,0 +1,94 @@
+.tooltip {
+  position: fixed; /* Using fixed to ensure it's visible in all contexts */
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  z-index: 1000;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  max-width: min(220px, 90vw); /* Responsive width */
+  width: auto;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(2px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transform: translate(0, 0); /* For precise positioning */
+}
+
+.tooltipVisible {
+  opacity: 1;
+}
+
+.tooltipHeader {
+  font-weight: bold;
+  margin-bottom: 4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 4px;
+}
+
+.tooltipRow {
+  display: flex;
+  justify-content: space-between;
+  margin: 2px 0;
+}
+
+.tooltipLabel {
+  color: rgba(255, 255, 255, 0.7);
+  margin-right: 8px;
+}
+
+.tooltipValue {
+  font-weight: 500;
+}
+
+.tooltipRisk {
+  font-weight: bold;
+}
+
+.tooltipRiskHigh {
+  color: #ff4d4d;
+}
+
+.tooltipRiskMedium {
+  color: #ffcc00;
+}
+
+.tooltipRiskLow {
+  color: #00cc66;
+}
+
+.interactableComponent {
+  cursor: pointer;
+  transition: filter 0.2s ease;
+}
+
+.interactableComponent:hover {
+  filter: brightness(1.2) drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+}
+
+/* Media queries for responsive tooltip */
+@media (max-width: 768px) {
+  .tooltip {
+    font-size: 0.7rem;
+    padding: 6px 10px;
+  }
+
+  .tooltipHeader {
+    margin-bottom: 3px;
+    padding-bottom: 3px;
+  }
+
+  .tooltipRow {
+    margin: 1px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .tooltip {
+    font-size: 0.65rem;
+    padding: 5px 8px;
+    max-width: calc(100vw - 30px);
+  }
+}

@@ -3,8 +3,18 @@ import { cn } from "@/lib/utils";
 import criticalStyles from "./CriticalAlert.module.css";
 import tooltipStyles from "./TurbineTooltip.module.css";
 
-interface TurbineEngineProps {
-  fanColor?: string;
+interface TurbineEnginePr          // Apply color to all child paths of fan elements
+        el.querySelectorAll("path").forEach((path) => {
+          path.setAttribute("fill", fanColor);
+          path.style.fill = fanColor;
+          
+          // Also apply animation to child paths
+          if (criticalComponents.fan) {
+            path.classList.add(criticalStyles.criticalPulse);
+          } else {
+            path.classList.remove(criticalStyles.criticalPulse);
+          }
+        });Color?: string;
   compressorColor?: string;
   turbineColor?: string;
   exhaustColor?: string;
@@ -69,46 +79,46 @@ export default function TurbineEngine({
   turbineColor = "#FFFF00", // Bright yellow for Turbine
   exhaustColor = "#00AAFF", // Bright blue for Exhaust
   className,
-  width = "100%",
-  height = "100%", // Use full height of container
-  preserveAspectRatio = "xMidYMid contain", // Use contain to ensure it fits within bounds
+  width = "100%", 
+  height = "80%", // Making the SVG a bit smaller
+  preserveAspectRatio = "xMidYMid meet",
   criticalComponents = {
     fan: false,
     compressor: false,
     turbine: false,
-    exhaust: false,
+    exhaust: false
   },
   componentData = {
     fan: {
       name: "Fan/Inlet",
       risk: 25,
       vendors: 12,
-      issues: 0,
+      issues: 0
     },
     compressor: {
       name: "Compressor",
       risk: 60,
       vendors: 8,
-      issues: 2,
+      issues: 2
     },
     turbine: {
       name: "Turbine",
       risk: 75,
       vendors: 5,
-      issues: 3,
+      issues: 3
     },
     exhaust: {
       name: "Exhaust",
       risk: 45,
       vendors: 7,
-      issues: 1,
-    },
-  },
+      issues: 1
+    }
+  }
 }: TurbineEngineProps) {
   const [svgContent, setSvgContent] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
-  const [tooltipContent, setTooltipContent] = useState<string>("");
+  const [tooltipContent, setTooltipContent] = useState<string>('');
   const [tooltipVisible, setTooltipVisible] = useState<boolean>(false);
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
 
@@ -177,13 +187,13 @@ export default function TurbineEngine({
   // Effect to modify the DOM directly when colors change
   useEffect(() => {
     if (!containerRef.current || !svgContent) return;
-
+    
     // Log color values every time they change
     console.log("TurbineEngine received new color values:", {
       fanColor,
       compressorColor,
       turbineColor,
-      exhaustColor,
+      exhaustColor
     });
 
     // Wait for the SVG to be in the DOM
@@ -195,36 +205,24 @@ export default function TurbineEngine({
       }
 
       // Get current colors before updating
-      const prevFanColor =
-        svgElement
-          .querySelector('[inkscape\\:label="Fan"]')
-          ?.getAttribute("fill") || "unknown";
-      const prevCompColor =
-        svgElement
-          .querySelector('[inkscape\\:label="compressor"]')
-          ?.getAttribute("fill") || "unknown";
-      const prevTurbineColor =
-        svgElement
-          .querySelector('[inkscape\\:label="Turbine"]')
-          ?.getAttribute("fill") || "unknown";
-      const prevExhaustColor =
-        svgElement
-          .querySelector('[inkscape\\:label="Exhaust"]')
-          ?.getAttribute("fill") || "unknown";
-
+      const prevFanColor = svgElement.querySelector('[inkscape\\:label="Fan"]')?.getAttribute("fill") || "unknown";
+      const prevCompColor = svgElement.querySelector('[inkscape\\:label="compressor"]')?.getAttribute("fill") || "unknown";
+      const prevTurbineColor = svgElement.querySelector('[inkscape\\:label="Turbine"]')?.getAttribute("fill") || "unknown";
+      const prevExhaustColor = svgElement.querySelector('[inkscape\\:label="Exhaust"]')?.getAttribute("fill") || "unknown";
+      
       console.log("Applying colors via direct DOM manipulation:", {
         previous: {
           fan: prevFanColor,
           compressor: prevCompColor,
           turbine: prevTurbineColor,
-          exhaust: prevExhaustColor,
+          exhaust: prevExhaustColor
         },
         new: {
           fan: fanColor,
           compressor: compressorColor,
           turbine: turbineColor,
-          exhaust: exhaustColor,
-        },
+          exhaust: exhaustColor
+        }
       });
 
       // Update Fan elements
@@ -232,7 +230,7 @@ export default function TurbineEngine({
         '[inkscape\\:label="Fan"], [id="Fan"], g#Fan, [class*="Fan"]',
       );
       console.log(`Found ${fanElements.length} Fan elements to update`);
-
+      
       fanElements.forEach((el) => {
         console.log(`Updating Fan element to color: ${fanColor}`);
         el.setAttribute("fill", fanColor);
@@ -242,20 +240,18 @@ export default function TurbineEngine({
           style.replace(/fill:[^;]+;/, `fill:${fanColor};`),
         );
 
-        // Apply animation class for critical components
+          // Apply animation class for critical components
         if (criticalComponents.fan) {
           el.classList.add(criticalStyles.criticalPulse);
           el.classList.add(criticalStyles.criticalBorder);
         } else {
           el.classList.remove(criticalStyles.criticalPulse);
           el.classList.remove(criticalStyles.criticalBorder);
-        }
-
-        // Apply color to all child paths of fan elements
+        }        // Apply color to all child paths of fan elements
         el.querySelectorAll("path").forEach((path) => {
           path.setAttribute("fill", fanColor);
           path.style.fill = fanColor;
-
+          
           // Also apply animation to child paths
           if (criticalComponents.fan) {
             path.classList.add(criticalStyles.criticalPulse);
@@ -288,7 +284,7 @@ export default function TurbineEngine({
           "style",
           style.replace(/fill:[^;]+;/, `fill:${compressorColor};`),
         );
-
+        
         // Apply animation class for critical components
         if (criticalComponents.compressor) {
           el.classList.add(criticalStyles.criticalPulse);
@@ -297,12 +293,12 @@ export default function TurbineEngine({
           el.classList.remove(criticalStyles.criticalPulse);
           el.classList.remove(criticalStyles.criticalBorder);
         }
-
+        
         // Apply to child elements
         el.querySelectorAll("path").forEach((path) => {
           path.setAttribute("fill", compressorColor);
           path.style.fill = compressorColor;
-
+          
           if (criticalComponents.compressor) {
             path.classList.add(criticalStyles.criticalPulse);
           } else {
@@ -323,7 +319,7 @@ export default function TurbineEngine({
           "style",
           style.replace(/fill:[^;]+;/, `fill:${turbineColor};`),
         );
-
+        
         // Apply animation class for critical components
         if (criticalComponents.turbine) {
           el.classList.add(criticalStyles.criticalPulse);
@@ -332,12 +328,12 @@ export default function TurbineEngine({
           el.classList.remove(criticalStyles.criticalPulse);
           el.classList.remove(criticalStyles.criticalBorder);
         }
-
+        
         // Apply to child elements
         el.querySelectorAll("path").forEach((path) => {
           path.setAttribute("fill", turbineColor);
           path.style.fill = turbineColor;
-
+          
           if (criticalComponents.turbine) {
             path.classList.add(criticalStyles.criticalPulse);
           } else {
@@ -360,7 +356,7 @@ export default function TurbineEngine({
             "style",
             style.replace(/fill:[^;]+;/, `fill:${exhaustColor};`),
           );
-
+          
           // Apply animation class for critical components
           if (criticalComponents.exhaust) {
             el.classList.add(criticalStyles.criticalPulse);
@@ -374,7 +370,7 @@ export default function TurbineEngine({
           el.querySelectorAll("path").forEach((path) => {
             path.setAttribute("fill", exhaustColor);
             path.style.fill = exhaustColor;
-
+            
             if (criticalComponents.exhaust) {
               path.classList.add(criticalStyles.criticalPulse);
             } else {
@@ -406,7 +402,7 @@ export default function TurbineEngine({
             console.log("Found likely exhaust path");
             path.setAttribute("fill", exhaustColor);
             path.style.fill = exhaustColor;
-
+            
             // Apply animation to exhaust path if critical
             if (criticalComponents.exhaust) {
               path.classList.add(criticalStyles.criticalPulse);
@@ -423,7 +419,7 @@ export default function TurbineEngine({
                 "style",
                 style.replace(/fill:[^;]+;/, `fill:${exhaustColor};`),
               );
-
+              
               // Apply animation to parent group if critical
               if (criticalComponents.exhaust) {
                 parent.classList.add(criticalStyles.criticalPulse);
@@ -437,14 +433,7 @@ export default function TurbineEngine({
         });
       }
     }, 100);
-  }, [
-    svgContent,
-    fanColor,
-    compressorColor,
-    turbineColor,
-    exhaustColor,
-    criticalComponents,
-  ]);
+  }, [svgContent, fanColor, compressorColor, turbineColor, exhaustColor, criticalComponents]);
 
   /**
    * A more robust method to modify SVG content by creating a DOM, manipulating it,
@@ -461,25 +450,10 @@ export default function TurbineEngine({
       // Apply responsive attributes to the root SVG element
       const svgRoot = svgDoc.querySelector("svg");
       if (svgRoot) {
-        // Ensure the viewBox attribute exists for proper scaling
-        if (
-          !svgRoot.hasAttribute("viewBox") &&
-          svgRoot.hasAttribute("width") &&
-          svgRoot.hasAttribute("height")
-        ) {
-          const width = svgRoot.getAttribute("width") || "800";
-          const height = svgRoot.getAttribute("height") || "600";
-          svgRoot.setAttribute("viewBox", `0 0 ${width} ${height}`);
-        }
-
-        // Make SVG fully responsive
         svgRoot.setAttribute("width", "100%");
         svgRoot.setAttribute("height", "100%");
         svgRoot.setAttribute("preserveAspectRatio", preserveAspectRatio);
-        svgRoot.setAttribute(
-          "style",
-          "max-width: 100%; max-height: 100%; object-fit: contain;",
-        );
+        svgRoot.setAttribute("style", "max-width: 100%; height: auto;");
       }
 
       // Find the specific path and apply fan color directly
@@ -699,103 +673,92 @@ export default function TurbineEngine({
   // Handle mouse events for tooltips
   const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
     if (!containerRef.current || !svgContent) return;
-
+    
     const svgElement = containerRef.current.querySelector("svg");
     if (!svgElement) return;
-
+    
     const rect = containerRef.current.getBoundingClientRect();
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
-
+    
     // Check which component is being hovered
     // This is a simplified detection method - in production you'd want more precise detection
-    const elementAtPoint = document.elementFromPoint(
-      event.clientX,
-      event.clientY,
-    );
+    const elementAtPoint = document.elementFromPoint(event.clientX, event.clientY);
     if (!elementAtPoint) return;
-
+    
     // Check if the element or any of its parents are part of our components
     let currentEl: Element | null = elementAtPoint;
     let hoverData = null;
-
+    
     while (currentEl && currentEl !== svgElement) {
       // Check for fan component
-      if (
-        currentEl.classList.contains("Fan") ||
-        currentEl.id === "Fan" ||
-        currentEl.getAttribute("inkscape:label") === "Fan"
-      ) {
+      if (currentEl.classList.contains('Fan') || 
+          currentEl.id === 'Fan' || 
+          currentEl.getAttribute('inkscape:label') === 'Fan') {
         hoverData = {
           name: componentData?.fan?.name || "Fan/Inlet",
           data: componentData?.fan || {
             risk: 25,
             vendors: 12,
-            issues: 0,
-          },
+            issues: 0
+          }
         };
         break;
       }
-
+      
       // Check for compressor component
-      if (
-        currentEl.classList.contains("compressor") ||
-        currentEl.id === "compressor" ||
-        currentEl.getAttribute("inkscape:label") === "compressor"
-      ) {
+      if (currentEl.classList.contains('compressor') || 
+          currentEl.id === 'compressor' || 
+          currentEl.getAttribute('inkscape:label') === 'compressor') {
         hoverData = {
           name: componentData?.compressor?.name || "Compressor",
           data: componentData?.compressor || {
             risk: 60,
             vendors: 8,
-            issues: 2,
-          },
+            issues: 2
+          }
         };
         break;
       }
-
+      
       // Check for turbine component
-      if (
-        currentEl.classList.contains("Turbinee") ||
-        currentEl.id === "Turbinee" ||
-        currentEl.getAttribute("inkscape:label") === "Turbinee"
-      ) {
+      if (currentEl.classList.contains('Turbinee') || 
+          currentEl.id === 'Turbinee' || 
+          currentEl.getAttribute('inkscape:label') === 'Turbinee') {
         hoverData = {
           name: componentData?.turbine?.name || "Turbine",
           data: componentData?.turbine || {
             risk: 75,
             vendors: 5,
-            issues: 3,
-          },
+            issues: 3
+          }
         };
         break;
       }
-
+      
       // Check for exhaust component
-      if (
-        currentEl.classList.contains("Exaust") ||
-        currentEl.classList.contains("Exhaust") ||
-        currentEl.id === "Exaust" ||
-        currentEl.id === "Exhaust" ||
-        currentEl.getAttribute("inkscape:label") === "Exaust" ||
-        currentEl.getAttribute("inkscape:label") === "Exhaust"
-      ) {
+      if (currentEl.classList.contains('Exaust') || 
+          currentEl.classList.contains('Exhaust') || 
+          currentEl.id === 'Exaust' || 
+          currentEl.id === 'Exhaust' || 
+          currentEl.getAttribute('inkscape:label') === 'Exaust' || 
+          currentEl.getAttribute('inkscape:label') === 'Exhaust') {
         hoverData = {
           name: componentData?.exhaust?.name || "Exhaust",
           data: componentData?.exhaust || {
             risk: 45,
             vendors: 7,
-            issues: 1,
-          },
+            issues: 1
+          }
         };
         break;
       }
-
+      
       currentEl = currentEl.parentElement;
     }
-
+    
     if (hoverData) {
-      // We found a component, show responsive tooltip
+      // We found a component, show tooltip
       setTooltipContent(`
         <div class="${tooltipStyles.tooltipHeader}">${hoverData.name}</div>
         <div class="${tooltipStyles.tooltipRow}">
@@ -810,57 +773,32 @@ export default function TurbineEngine({
           <span class="${tooltipStyles.tooltipLabel}">Issues:</span>
           <span class="${tooltipStyles.tooltipValue}">${hoverData.data.issues || 0}</span>
         </div>
-        ${Object.entries(hoverData.data)
-          .filter(
-            ([key]) => !["risk", "vendors", "issues", "name"].includes(key),
-          )
-          .map(
-            ([key, value]) => `
-            <div class="${tooltipStyles.tooltipRow}">
-              <span class="${tooltipStyles.tooltipLabel}">${key}:</span>
-              <span class="${tooltipStyles.tooltipValue}">${value}</span>
-            </div>
-          `,
-          )
-          .join("")}
       `);
-
-      // Compute tooltip position based on view constraints
-      const viewportWidth = window.innerWidth;
-      const viewportHeight = window.innerHeight;
-
-      // Calculate tooltip position with boundary detection
-      const tooltipX = Math.min(event.clientX + 15, viewportWidth - 230); // Allow space for tooltip width
-      const tooltipY = Math.min(event.clientY - 10, viewportHeight - 150); // Allow space for tooltip height
-
-      // Apply position
+      
       setTooltipVisible(true);
-      setTooltipPosition({
-        x: tooltipX,
-        y: tooltipY,
-      });
+      setTooltipPosition({ x: event.clientX, y: event.clientY });
     } else {
       setTooltipVisible(false);
     }
   };
-
+  
   const getRiskClass = (riskValue: number) => {
     if (riskValue >= 70) return tooltipStyles.tooltipRiskHigh;
     if (riskValue >= 40) return tooltipStyles.tooltipRiskMedium;
     return tooltipStyles.tooltipRiskLow;
   };
-
+  
   const handleMouseLeave = () => {
     setTooltipVisible(false);
   };
 
   // Create a container to inject the SVG content
   return (
-    <div className="relative w-full h-full flex items-center justify-center">
+    <div className="relative">
       <div
         ref={containerRef}
         className={cn(
-          "turbine-engine-container relative w-full h-full flex items-center justify-center overflow-hidden",
+          "turbine-engine-container relative w-full h-full",
           className,
         )}
         style={{
@@ -875,18 +813,15 @@ export default function TurbineEngine({
             : '<div class="flex items-center justify-center w-full h-full">Loading turbine...</div>',
         }}
       />
-
-      {/* Responsive Tooltip */}
+      
+      {/* Tooltip */}
       {tooltipVisible && (
-        <div
+        <div 
           ref={tooltipRef}
           className={cn(tooltipStyles.tooltip, tooltipStyles.tooltipVisible)}
           style={{
-            left: `${tooltipPosition.x}px`,
-            top: `${tooltipPosition.y}px`,
-            maxWidth: "min(220px, calc(100vw - 40px))", // Responsive width
-            maxHeight: "calc(100vh - 40px)", // Ensure it doesn't overflow viewport
-            overflow: "auto", // In case content is too large
+            left: `${tooltipPosition.x + 15}px`,
+            top: `${tooltipPosition.y - 10}px`
           }}
           dangerouslySetInnerHTML={{ __html: tooltipContent }}
         />
